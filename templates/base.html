@@ -12,6 +12,25 @@
     <link rel="stylesheet" href="{% static 'css/demo.css' %}">
 </head>
 <body>
+	{% if messages %}
+  <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            z-index: 99999; width: auto; max-width: 90%; text-align: center; pointer-events: none;">
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }} alert-dismissible fade show shadow-lg"
+           role="alert"
+           style="display: inline-block; pointer-events: auto; max-width: 90%; margin: 10px auto; border-radius: 8px; padding: 15px; background-color: #f8f9fa; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
+        <div style="font-size: 1rem; color: #333;">
+          {{ message }}
+        </div>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="background: none; border: none; font-size: 1.5rem; color: #999; cursor: pointer; transition: color 0.3s;">
+          <span aria-hidden="true" style="font-weight: bold;">&times;</span>
+        </button>
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+
+
 	<div class="wrapper">
 		<div class="main-header">
 			<div class="logo-header">
@@ -79,7 +98,7 @@
 										</a>
 										<a href="#">
 											<div class="notif-img"> 
-												<img src="{% static '/img/profile2.jpg' %}" alt="Img Profile">
+												<img src="{% static '/img/boss.jpg' %}" alt="Img Profile">
 											</div>
 											<div class="notif-content">
 												<span class="block">
@@ -105,14 +124,14 @@
 							</ul>
 						</li>
 						<li class="nav-item dropdown">
-							<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false"> <img src="{% static '/img/profile2.jpg' %}" alt="Img Profile" width="36" class="img-circle"><span >Hizrian</span></span> </a>
+							<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false"> <img src="{% static '/img/boss.jpg' %}" alt="Img Profile" width="36" class="img-circle"><span >Rovin The nigga</span></span> </a>
 							<ul class="dropdown-menu dropdown-user">
 								<li>
 									<div class="user-box">
-										<div class="u-img"><img src="{% static '/img/profile2.jpg' %}" alt="Img Profile"></div>
+										<div class="u-img"><img src="{% static '/img/boss.jpg' %}" alt="Img Profile"></div>
 										<div class="u-text">
-											<h4>Hizrian</h4>
-											<p class="text-muted">hello@themekita.com</p><a href="profile.html" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
+											<h4>Rovin The Nigga Man</h4>
+											<p class="text-muted">poppyx@gmail.com</p><a href="profile.html" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
 										</div>
 									</li>
 									<div class="dropdown-divider"></div>
@@ -138,12 +157,12 @@
 				<div class="scrollbar-inner sidebar-wrapper">
 					<div class="user">
 						<div class="photo">
-							<img src="{% static '/img/profile2.jpg' %}" alt="Img Profile">
+							<img src="{% static '/img/boss.jpg' %}" alt="Img Profile">
 						</div>
 						<div class="info">
 							<a class="" data-toggle="collapse" href="#collapseExample" aria-expanded="true">
 								<span>
-									Hizrian
+									Rovin Nigga
 									<span class="user-level">Administrator</span>
 									<span class="caret"></span>
 								</span>
@@ -219,6 +238,10 @@
 				</div>
 			</div>
 			<div class="main-panel">
+			
+
+			
+				
 				{% block content %}
                 {% endblock %}
 				<footer class="footer">

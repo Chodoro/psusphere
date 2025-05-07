@@ -4,6 +4,7 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.db.models import Q
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 from studentorg.forms import OrganizationForm, OrgmemberForm, StudentForm, ProgramForm, CollegeForm
 from studentorg.models import Organization, Orgmember, Student, College, Program
@@ -44,6 +45,10 @@ class OrganizationCreateView(CreateView):
     template_name = 'org_add.html'
     success_url = reverse_lazy('organization-list')
 
+    def form_valid(self, form):
+        messages.success(self.request, 'Organization created successfully!')
+        return super().form_valid(form)
+
 
 @method_decorator(login_required, name='dispatch')
 class OrganizationUpdateView(UpdateView):
@@ -52,12 +57,20 @@ class OrganizationUpdateView(UpdateView):
     template_name = 'org_edit.html'
     success_url = reverse_lazy('organization-list')
 
+    def form_valid(self, form):
+        messages.success(self.request, f'Organization "{form.instance.name}" updated successfully!')
+        return super().form_valid(form)
+
 
 @method_decorator(login_required, name='dispatch')
 class OrganizationDeleteView(DeleteView):
     model = Organization
     template_name = 'org_del.html'
     success_url = reverse_lazy('organization-list')
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, 'Organization deleted successfully!')
+        return super().delete(request, *args, **kwargs)
 
 
 # -------- ORGMEMBER --------
@@ -87,6 +100,10 @@ class OrgmemberCreateView(CreateView):
     template_name = 'orgmem_add.html'
     success_url = reverse_lazy('orgmember-list')
 
+    def form_valid(self, form):
+        messages.success(self.request, 'Organization member created successfully!')
+        return super().form_valid(form)
+
 
 @method_decorator(login_required, name='dispatch')
 class OrgmemberUpdateView(UpdateView):
@@ -95,12 +112,20 @@ class OrgmemberUpdateView(UpdateView):
     template_name = 'orgmem_edit.html'
     success_url = reverse_lazy('orgmember-list')
 
+    def form_valid(self, form):
+        messages.success(self.request, f'Organization member "{form.instance.student.firstname} {form.instance.student.lastname}" updated successfully!')
+        return super().form_valid(form)
+
 
 @method_decorator(login_required, name='dispatch')
 class OrgmemberDeleteView(DeleteView):
     model = Orgmember
     template_name = 'orgmem_del.html'
     success_url = reverse_lazy('orgmember-list')
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, 'Organization member deleted successfully!')
+        return super().delete(request, *args, **kwargs)
 
 
 # -------- STUDENT --------
@@ -132,6 +157,10 @@ class StudentCreateView(CreateView):
     template_name = 'student_add.html'
     success_url = reverse_lazy('student-list')
 
+    def form_valid(self, form):
+        messages.success(self.request, 'Student created successfully!')
+        return super().form_valid(form)
+
 
 @method_decorator(login_required, name='dispatch')
 class StudentUpdateView(UpdateView):
@@ -140,12 +169,20 @@ class StudentUpdateView(UpdateView):
     template_name = 'student_edit.html'
     success_url = reverse_lazy('student-list')
 
+    def form_valid(self, form):
+        messages.success(self.request, f'Student "{form.instance.firstname} {form.instance.lastname}" updated successfully!')
+        return super().form_valid(form)
+
 
 @method_decorator(login_required, name='dispatch')
 class StudentDeleteView(DeleteView):
     model = Student
     template_name = 'student_del.html'
     success_url = reverse_lazy('student-list')
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, 'Student deleted successfully!')
+        return super().delete(request, *args, **kwargs)
 
 
 # -------- COLLEGE --------
@@ -171,6 +208,10 @@ class CollegeCreateView(CreateView):
     template_name = 'college_add.html'
     success_url = reverse_lazy('college-list')
 
+    def form_valid(self, form):
+        messages.success(self.request, 'College created successfully!')
+        return super().form_valid(form)
+
 
 @method_decorator(login_required, name='dispatch')
 class CollegeUpdateView(UpdateView):
@@ -179,12 +220,21 @@ class CollegeUpdateView(UpdateView):
     template_name = 'college_edit.html'
     success_url = reverse_lazy('college-list')
 
+    def form_valid(self, form):
+        college_name = form.instance.college_name
+        messages.success(self.request, f'College "{college_name}" updated successfully!')
+        return super().form_valid(form)
+
 
 @method_decorator(login_required, name='dispatch')
 class CollegeDeleteView(DeleteView):
     model = College
     template_name = 'college_del.html'
     success_url = reverse_lazy('college-list')
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, 'College deleted successfully!')
+        return super().delete(request, *args, **kwargs)
 
 
 # -------- PROGRAM --------
@@ -213,6 +263,10 @@ class ProgramCreateView(CreateView):
     template_name = 'program_add.html'
     success_url = reverse_lazy('program-list')
 
+    def form_valid(self, form):
+        messages.success(self.request, 'Program created successfully!')
+        return super().form_valid(form)
+
 
 @method_decorator(login_required, name='dispatch')
 class ProgramUpdateView(UpdateView):
@@ -221,9 +275,17 @@ class ProgramUpdateView(UpdateView):
     template_name = 'program_edit.html'
     success_url = reverse_lazy('program-list')
 
+    def form_valid(self, form):
+        messages.success(self.request, f'Program "{form.instance.prog_name}" updated successfully!')
+        return super().form_valid(form)
+
 
 @method_decorator(login_required, name='dispatch')
 class ProgramDeleteView(DeleteView):
     model = Program
     template_name = 'program_del.html'
     success_url = reverse_lazy('program-list')
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, 'Program deleted successfully!')
+        return super().delete(request, *args, **kwargs)
